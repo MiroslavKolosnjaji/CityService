@@ -3,9 +3,11 @@ package com.example.cityservice.controller;
 import com.example.cityservice.dto.CityDTO;
 import com.example.cityservice.service.CityService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -30,23 +32,24 @@ public class CityController {
     }
 
     @PutMapping(CITY_PATH_ID)
-    ResponseEntity<Void> updateCity(@Validated @RequestBody CityDTO cityDTO) {
+    Mono<ResponseEntity<Void>> updateCity(@Validated @RequestBody CityDTO cityDTO) {
 
-        cityService.update(cityDTO).subscribe();
-
-        return ResponseEntity.ok().build();
-
+        return cityService.update(cityDTO)
+                .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND)))
+                .map(savedDto -> ResponseEntity.noContent().build());
     }
 
     @PatchMapping(CITY_PATH_ID)
     Mono<ResponseEntity<Void>> patchExistingCity(@Validated @RequestBody CityDTO cityDTO) {
         return cityService.patch(cityDTO)
+                .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND)))
                 .map(updatedDto -> ResponseEntity.ok().build());
     }
 
     @GetMapping(CITY_PATH_ID)
     Mono<CityDTO> getCityById(@PathVariable("id") Long id) {
-        return cityService.findById(id);
+        return cityService.findById(id)
+                .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND)));
     }
 
     @GetMapping(CITY_PATH)
@@ -56,7 +59,9 @@ public class CityController {
 
     @DeleteMapping(CITY_PATH_ID)
     Mono<ResponseEntity<Void>> deleteCity(@PathVariable("id") Long id) {
-        return cityService.deleteById(id)
-                .map(savedDto -> ResponseEntity.noContent().build());
+        return cityService.findById(id)
+                .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND)))
+                .map(city -> cityService.deleteById(city.getId()))
+                .thenReturn(ResponseEntity.noContent().build());
     }
 }
