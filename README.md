@@ -1,3 +1,4 @@
+[![CircleCI](https://dl.circleci.com/status-badge/img/circleci/K6MEbnQdqEgQE7qSJFetp9/Ky9wudysdNyeCJkRJQHVYz/tree/main.svg?style=svg&circle-token=CCIPRJ_9oXWeKhj21MnZyYt93nCxP_c4d0eb0261c06f0705ceeffa00c28435b8c21b89)](https://dl.circleci.com/status-badge/redirect/circleci/K6MEbnQdqEgQE7qSJFetp9/Ky9wudysdNyeCJkRJQHVYz/tree/main)
 # CityService
 
 The CityService microservice is designed to manage city data, leveraging various modern Java technologies such as Spring Framework, Project Lombok, and WebFlux for reactive programming.
