@@ -1,8 +1,16 @@
 [![CircleCI](https://dl.circleci.com/status-badge/img/circleci/K6MEbnQdqEgQE7qSJFetp9/Ky9wudysdNyeCJkRJQHVYz/tree/main.svg?style=svg&circle-token=CCIPRJ_9oXWeKhj21MnZyYt93nCxP_c4d0eb0261c06f0705ceeffa00c28435b8c21b89)](https://dl.circleci.com/status-badge/redirect/circleci/K6MEbnQdqEgQE7qSJFetp9/Ky9wudysdNyeCJkRJQHVYz/tree/main)
+![Java](https://img.shields.io/badge/Java-17-brightgreen)
+![Spring WebFlux](https://img.shields.io/badge/Spring%20WebFlux-Reactive-blue)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+![GitHub forks](https://img.shields.io/github/forks/MiroslavKolosnjaji/CityService)
 # CityService
 
 The CityService microservice is designed to manage city data, leveraging various modern Java technologies such as Spring Framework, Project Lombok, and WebFlux for reactive programming.
 It provides a RESTful API for CRUD Operations on city entities.
+
+## Limitations and Use Case
+This microservice was developed as a practice project to explore reactive programming with Spring WebFlux.  
+It is not intended for production use but serves as a learning tool to demonstrate modern Java development practices and principles.
 
 ## Technologies Used:
 
@@ -20,4 +28,6 @@ It provides a RESTful API for CRUD Operations on city entities.
 
  #### This project showcases modern Java development practices, emphasizing reactive programming and clean architecture for building scalable and maintainable microservices.
 
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
